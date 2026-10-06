@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learning Design Aotearoa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Kanit", system-ui, sans-serif; font-weight: 300; background: #000; color: #fff; }
+
+    section { min-height: 100vh; min-height: 100svh; scroll-snap-align: start; position: relative; }
+
+    /* ---------- Hero (01) ---------- */
+    .hero { background: #000; display: flex; flex-direction: column; }
+
+    nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto 1fr 1fr;
+      align-items: center;
+      padding: 2.5vh 4vw 0;
+    }
+    nav a { color: #fff; text-decoration: none; font-size: clamp(14px, 1.6vw, 30px); text-align: center; transition: text-shadow .2s; }
+    nav a:hover, nav a:focus-visible { text-shadow: 0 0 8px rgba(255,255,255,.8); outline: none; }
+    nav .nav-bolt img { height: clamp(30px, 6vh, 64px); display: block; margin-top: -1.5vh; }
+
+    .badge-wrap { flex: 1; display: grid; place-items: center; padding: 3vh 16px 5vh; }
+    .badge { position: relative; width: min(69vh, 100%); aspect-ratio: 780 / 855; }
+    .badge img { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .badge .on { opacity: 0; }
+
+    /* LED switch-on: stutter, catch, settle, then hum */
+    .badge.lit .on {
+      animation:
+        ignite 2.4s steps(1, end) .5s forwards,
+        hum 7s ease-in-out 2.9s infinite;
+    }
+    @keyframes ignite {
+      0%   { opacity: 0; }
+      4%   { opacity: .9; }
+      7%   { opacity: 0; }
+      12%  { opacity: .55; }
+      14%  { opacity: 0; }
+      30%  { opacity: 0; }
+      33%  { opacity: 1; }
+      36%  { opacity: .2; }
+      40%  { opacity: 1; }
+      44%  { opacity: 0; }
+      58%  { opacity: 0; }
+      61%  { opacity: .8; }
+      64%  { opacity: .3; }
+      68%  { opacity: 1; }
+      100% { opacity: 1; }
+    }
+    /* Occasional faint buzz once it's fully on */
+    @keyframes hum {
+      0%, 40%, 44%, 80%, 100% { opacity: 1; }
+      41% { opacity: .6; }
+      42% { opacity: 1; }
+      43% { opacity: .75; }
+      81% { opacity: .85; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .badge.lit .on { animation: none; opacity: 1; }
+    }
+
+    /* ---------- About (02) ---------- */
+    .about {
+      background: #fff; color: #111;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      align-items: center;
+      gap: 2vw;
+      padding: 7vh 6vw;
+    }
+    .about p {
+      margin: 0;
+      text-align: center;
+      letter-spacing: .22em;
+      line-height: 1.55;
+      font-size: clamp(14px, min(1.3vw, 2.2vh), 26px);
+    }
+    .about .left  { grid-column: 1; grid-row: 1; align-self: start; }
+    .about .mark  { grid-column: 2; grid-row: 1 / span 2; width: 100%; height: auto; }
+    .about .right { grid-column: 3; grid-row: 2; align-self: end; }
+
+    @media (max-width: 760px) {
+      nav { grid-template-columns: repeat(4, auto); justify-content: space-between; row-gap: 12px; padding: 20px 16px 0; }
+      nav .nav-bolt { grid-column: 1 / -1; grid-row: 1; justify-self: center; }
+      nav .nav-bolt img { margin-top: 0; }
+      .about { grid-template-columns: 1fr; grid-template-rows: auto; gap: 40px; padding: 64px 16px; align-content: center; }
+      .about .left, .about .mark, .about .right { grid-column: 1; grid-row: auto; }
+      .about .mark { order: -1; }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero" id="home">
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#creative">Creative</a>
+      <a href="#home" class="nav-bolt" aria-label="Learning Design Aotearoa"><img src="assets/nav-bolt.png" alt=""></a>
+      <a href="#consulting">Consulting</a>
+      <a href="#leadership">Leadership</a>
+    </nav>
+    <div class="badge-wrap">
+      <div class="badge" id="badge">
+        <img class="off" src="assets/badge-off.png" alt="Learning Design Aotearoa — Ideas · People · Organisations">
+        <img class="on" src="assets/badge-on.png" alt="" aria-hidden="true">
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="creative">
+    <p class="left">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation</p>
+    <img class="mark" src="assets/wordmark.png" alt="Learning Design Aotearoa">
+    <p class="right">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit</p>
+  </section>
+
+  <script>
+    // Switch the bolt on once both images have loaded, and again whenever the
+    // visitor scrolls back up to the landing screen.
+    const badge = document.getElementById('badge');
+    const imgs = [...badge.querySelectorAll('img')];
+    const ready = Promise.all(imgs.map(i => i.complete ? null : new Promise(r => { i.onload = i.onerror = r; })));
+
+    ready.then(() => {
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          badge.classList.remove('lit');
+          void badge.offsetWidth; // restart the animation
+          badge.classList.add('lit');
+        }
+      }, { threshold: 0.6 }).observe(badge);
+    });
+  </script>
+</body>
+</html>
